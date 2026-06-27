@@ -1,0 +1,48 @@
+import java.util.*;
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        // start your solution
+        if (nums.length == 0)
+            return 0;
+
+        int j = 0; // index of last unique element
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[j]) {
+                j++;
+                nums[j] = nums[i];
+            }
+        }
+
+        return j + 1;
+        
+        
+        // end your solution
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        
+        Solution sol = new Solution();
+        int k = sol.removeDuplicates(nums);
+        
+        System.out.println(k);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < k; i++) {
+            sb.append(nums[i]);
+            if (i < k - 1) sb.append(" ");
+        }
+        System.out.println(sb.toString());
+        
+        sc.close();
+    }
+}
