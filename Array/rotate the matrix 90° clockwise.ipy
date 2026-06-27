@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        // start your solution
+        int n = matrix.length;
+
+        // Step 1: Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse every row
+        for (int i = 0; i < n; i++) {
+
+            int left = 0;
+            int right = n - 1;
+
+            while (left < right) {
+
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+
+                left++;
+                right--;
+            }
+        
+        }
+        // end your solution
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[][] matrix = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        
+        Solution sol = new Solution();
+        sol.rotate(matrix);
+        
+        for (int i = 0; i < n; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                sb.append(matrix[i][j]);
+                if (j < n - 1) sb.append(" ");
+            }
+            System.out.println(sb.toString());
+        }
+        
+        sc.close();
+    }
+}
