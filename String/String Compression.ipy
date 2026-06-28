@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Solution {
+    public int compress(char[] chars) {
+        // start your solution
+         int write = 0;
+        int read = 0;
+
+        while (read < chars.length) {
+
+            char current = chars[read];
+            int count = 0;
+
+            // Count consecutive same characters
+            while (read < chars.length && chars[read] == current) {
+                read++;
+                count++;
+            }
+
+            // Write the character
+            chars[write] = current;
+            write++;
+
+            // Write the count if greater than 1
+            if (count > 1) {
+                String str = String.valueOf(count);
+
+                for (char c : str.toCharArray()) {
+                    chars[write] = c;
+                    write++;
+                }
+            }
+        }
+
+        return write;
+        
+        
+        // end your solution
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        char[] chars = new char[n];
+        for (int i = 0; i < n; i++) {
+            chars[i] = sc.next().charAt(0);
+        }
+        
+        Solution sol = new Solution();
+        int newLength = sol.compress(chars);
+        
+        System.out.println(newLength);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < newLength; i++) {
+            sb.append(chars[i]);
+            if (i < newLength - 1) sb.append(" ");
+        }
+        System.out.println(sb.toString());
+        
+        sc.close();
+    }
+}

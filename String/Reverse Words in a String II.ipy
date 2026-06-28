@@ -1,0 +1,63 @@
+import java.util.*;
+
+class Solution {
+    public void reverseWords(char[] s) {
+        // Step 1: Reverse the whole string
+        reverse(s, 0, s.length - 1);
+
+        // Step 2: Reverse each word
+        int start = 0;
+
+        for (int end = 0; end <= s.length; end++) {
+            if (end == s.length || s[end] == ' ') {
+                reverse(s, start, end - 1);
+                start = end + 1;
+            }
+        }
+    }
+
+    // Helper function to reverse characters
+    private void reverse(char[] s, int left, int right) {
+        while (left < right) {
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        char[] s = new char[n];
+
+        // Read characters ('_' represents space)
+        for (int i = 0; i < n; i++) {
+            String temp = sc.next();
+            s[i] = temp.equals("_") ? ' ' : temp.charAt(0);
+        }
+
+        Solution sol = new Solution();
+        sol.reverseWords(s);
+
+        // Print result (' ' is printed as '_')
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            if (s[i] == ' ')
+                sb.append("_");
+            else
+                sb.append(s[i]);
+
+            if (i < n - 1)
+                sb.append(" ");
+        }
+
+        System.out.println(sb.toString());
+
+        sc.close();
+    }
+}
