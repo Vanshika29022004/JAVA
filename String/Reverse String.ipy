@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution {
+    public void reverseString(char[] s) {
+        // start your solution
+        int left = 0;
+        int right = s.length - 1;
+
+        while (left < right) {
+
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+
+            left++;
+            right--;
+        }
+        
+        
+        // end your solution
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        char[] s = new char[n];
+        for (int i = 0; i < n; i++) {
+            s[i] = sc.next().charAt(0);
+        }
+        
+        Solution sol = new Solution();
+        sol.reverseString(s);
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(s[i]);
+            if (i < n - 1) sb.append(" ");
+        }
+        System.out.println(sb.toString());
+        
+        sc.close();
+    }
+}
